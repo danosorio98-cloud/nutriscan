@@ -1,0 +1,51 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --g1:#2D6A4F;--g2:#52B788;--g3:#B7E4C7;--g4:#D8F3DC;--g5:#F0FFF4;
+  --red:#E57373;--red-bg:#FFEBEE;
+  --bg:#FFFFFF;--bg2:#F7F9F7;--bg3:#EFF3EF;
+  --border:#E0EDE0;--text1:#1A2E1A;--text2:#4A6741;--text3:#8FAE8F;
+  --tab-h:64px;
+  font-family:'Inter',system-ui,sans-serif;
+  color-scheme:light only;
+}
+
+html,body{height:100%;background:var(--bg);color:var(--text1);}
+button{font-family:inherit;border:none;cursor:pointer;background:none;color:inherit;}
+input,select{font-family:inherit;}
+
+.scr{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.sx{overflow-x:auto;display:flex;gap:10px;scrollbar-width:none;padding-bottom:2px;}
+.sx::-webkit-scrollbar{display:none}
+
+/* Buttons */
+.btn-p{background:var(--g1);color:#fff;border-radius:14px;padding:16px 24px;font-weight:700;font-size:15px;width:100%;transition:all .15s;letter-spacing:.2px;}
+.btn-p:active{transform:scale(.97);background:var(--g2);}
+.btn-p:disabled{opacity:.4;cursor:not-allowed;}
+.btn-s{background:transparent;color:var(--g1);font-weight:600;font-size:14px;padding:12px;width:100%;text-align:center;}
+
+/* Inputs */
+.inp{background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;font-size:15px;color:var(--text1);width:100%;outline:none;transition:border .2s;}
+.inp:focus{border-color:var(--g1);}
+select.inp{cursor:pointer;}
+
+/* Tags / badges */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+.tag-g{background:var(--g4);color:var(--g1);}
+.tag-r{background:var(--red-bg);color:var(--red);}
+.tag-b{background:#EDE9FE;color:#7C3AED;}
+
+/* Cards */
+.card{background:var(--bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.card-inner{padding:16px;}
+
+/* Score colors */
+.ok{background:#E8F5E9;color:#2E7D32;}
+.warn{background:#FFF8E1;color:#F57F17;}
+.bad{background:#FFEBEE;color:#C62828;}
+
+/* Spinner */
+.spin{width:28px;height:28px;border:3px solid var(--g4);border-top-color:var(--g1);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.fu{animation:fadeUp .25s ease both;}
