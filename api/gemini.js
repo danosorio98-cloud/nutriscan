@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (!key) return res.status(500).json({ error: { message: 'GEMINI_API_KEY no está configurada' } });
 
   const body = { ...req.body };
-  body.generationConfig = { thinkingConfig: { thinkingLevel: 'minimal' }, ...(body.generationConfig || {}) };
+  body.generationConfig = { thinkingConfig: { thinkingLevel: 'low' }, ...(body.generationConfig || {}) };
 
   try {
     const r = await fetch(
