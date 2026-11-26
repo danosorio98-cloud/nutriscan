@@ -1,5 +1,5 @@
 // Vercel serverless function: proxies requests to Gemini so the API key stays on the server.
-const MODEL = process.env.GEMINI_MODEL || 'gemini-flash-latest';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: { message: 'Method not allowed' } });
@@ -7,14 +7,17 @@ export default async function handler(req, res) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) return res.status(500).json({ error: { message: 'GEMINI_API_KEY no está configurada' } });
 
+  const body = { ...req.body };
+  body.generationConfig = { thinkingConfig: { thinkingLevel: 'minimal' }, ...(body.generationConfig || {}) };
+
   try {
     const r = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
-        body: JSON.stringify(req.body),
-        signal: AbortSignal.timeout(50000),
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(280000),
       }
     );
     const data = await r.json().catch(() => ({}));
