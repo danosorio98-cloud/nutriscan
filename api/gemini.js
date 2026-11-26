@@ -1,5 +1,5 @@
 // Vercel serverless function: proxies requests to Gemini so the API key stays on the server.
-const MODEL = 'gemini-2.0-flash';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: { message: 'Method not allowed' } });
